@@ -16,15 +16,15 @@ class Overlay:
         self.window = tk.Toplevel(parent)
         self.window.withdraw()
         self.window.title('Oracles overlay')
-        self.window.configure(bg=BG)
+        self.window.configure(bg=BG, borderwidth=0, highlightthickness=0)
         self.window.overrideredirect(True)
         self.window.attributes('-alpha', 0.5)
         self.window.attributes('-topmost', True)
         self.window.geometry('600x330+40+40')
-        self.canvas = tk.Canvas(self.window, bg=BG, highlightthickness=0)
-        self.canvas.pack(side='left', fill='both', expand=True, padx=(8,3), pady=8)
-        panel = tk.Frame(self.window, bg=BG, width=170)
-        panel.pack(side='left', fill='y', padx=(8,10), pady=12)
+        self.canvas = tk.Canvas(self.window, bg=BG, borderwidth=0, highlightthickness=0)
+        self.canvas.pack(side='left', fill='both', expand=True)
+        panel = tk.Frame(self.window, bg=BG, width=170, borderwidth=0, highlightthickness=0)
+        panel.pack(side='left', fill='y')
         panel.pack_propagate(False)
         def label(text, color, size, bold=False):
             widget = tk.Label(panel, text=text, fg=color, bg=BG,
@@ -54,9 +54,18 @@ class Overlay:
         user32.SetWindowPos.argtypes = [wintypes.HWND,wintypes.HWND,ctypes.c_int,ctypes.c_int,
                                        ctypes.c_int,ctypes.c_int,wintypes.UINT]
         hwnd = int(self.window.wm_frame(),0)
+        # Strip native frame/edge styles as well as Tk's decorations.
+        native_style = user32.GetWindowLongW(hwnd,-16)
+        user32.SetWindowLongW(hwnd,-16,native_style & ~(0x00C00000 | 0x00040000 | 0x00800000))
         style = user32.GetWindowLongW(hwnd,-20)
         # Transparent hit-testing, layered alpha, and no activation on click.
-        user32.SetWindowLongW(hwnd,-20,style | 0x20 | 0x80000 | 0x08000000)
+        user32.SetWindowLongW(hwnd,-20,(style & ~(0x1 | 0x100 | 0x200 | 0x20000)) | 0x20 | 0x80000 | 0x08000000)
+        # Windows 11 can otherwise add a compositor border around borderless windows.
+        dwm = ctypes.windll.dwmapi
+        dwm.DwmSetWindowAttribute.argtypes = [wintypes.HWND,wintypes.DWORD,ctypes.c_void_p,wintypes.DWORD]
+        for attribute,value in ((34,0xFFFFFFFE),(33,1),(2,1)):
+            setting = wintypes.DWORD(value)
+            dwm.DwmSetWindowAttribute(hwnd,attribute,ctypes.byref(setting),ctypes.sizeof(setting))
         user32.SetWindowPos(hwnd,wintypes.HWND(-1),40,40,600,330,0x10 | 0x20 | 0x40)
 
     def destroy(self):
