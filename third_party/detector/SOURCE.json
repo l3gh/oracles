@@ -1,0 +1,13 @@
+{
+  "repository": "https://github.com/PyrexPi/prophet",
+  "revision": "c1181db3ed7d46226f9e786de2b1399ab91b5ea3",
+  "files": {
+    "interface.py": "6fff71d0e76b835fdd07dc070894175cd1a6c451aa2e0b3ed2d1fd612414ab4b",
+    "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+    "main.py": "dae91cfbb7c601563b7935693d9a3e8178b71b93aae729208d7b8f83f32bd64b",
+    "model.py": "af36c26b2a63fc31619f18363599e7caf9e4a359b4c2aff91453073492299e74",
+    "README.md": "1dd9589f6d7c97ce36a8994334011291947d5cb9bd0b608aea1e57fc4e3498f7",
+    "requirements.txt": "47f3713b79a4045e625ea363968878fa5912b94cac001068392a456248b73022",
+    "resource_path.py": "fb811f1870ab97b36398d93b1ee414bbae254b21dab87de852639bcc11c3e0a9"
+  }
+}

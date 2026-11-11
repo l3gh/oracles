@@ -1,36 +1,70 @@
-# Oracles
+# ORACLES
 
-Windows desktop app for Vault of Glass oracle audio detection.
+![Windows](https://img.shields.io/badge/platform-Windows-0078D4)
+![Python](https://img.shields.io/badge/Python-3.14-3776AB)
+[![License: GPLv3](https://img.shields.io/badge/license-GPLv3-blue)](LICENSE)
 
-`original/` preserves the complete supplied tool folder, including both executables, audio samples, encounter mappings, maps, readme and the Python map overlay. The original files have not been modified.
+A Windows companion for oracle encounters in Destiny 2's Vault of Glass. Choose your encounter and game-audio input, then follow the detected oracle order on a small overlay.
 
-## Run
+## What it does
 
-Open `dist/Oracles.exe`. That is the only program you need to launch. It bundles the detector, samples, encounter mappings and map images. Python does not need to be installed on the recipient's PC.
+- Supports Templar and Atheon.
+- Starts from one executable, with graphical controls and no visible terminals.
+- Displays the detected sequence in the app and on an always-on-top overlay.
+- Keeps the overlay half-transparent, click-through and fixed in the upper-left corner.
+- Shows the encounter map, with numbered sequence markers for Templar.
+- Stops the background detector when you select Stop or close the app.
 
-1. Choose Templar or Atheon in the window.
-2. Choose the input carrying game audio, usually CABLE Output when using VB-CABLE. Audio routing still needs to be set up separately.
-3. Select Start listening. Select Stop to change settings or start another session.
+## Getting started
 
-The sequence appears in the app. Show overlay opens the original compact layout: map on the left, encounter and callouts on the right, 50% opacity, borderless, always on top and click-through. It is fixed at 600×330 pixels, 40 pixels from the upper-left corner. Use Hide overlay in the main app to hide it. Closing the main app stops the detector too. The Templar map marks sequence positions and connects them in order using the supplied overlay coordinates. Atheon retains its reference map and numeric sequence.
+There is no published ORACLES release yet. Build the app using the instructions below, then open `dist/Oracles.exe`. A built copy bundles the detector and assets; the person running it does not need Python.
 
-No terminal is opened and no options need to be typed. The original detector runs as a hidden child process. First startup can take a little while as the bundled Python/audio components load. Stopped sessions retain their last result for reference; starting a new session or changing encounters clears it.
+1. Route the game's audio to a virtual input, such as [VB-CABLE](https://vb-audio.com/Cable/).
+2. Open ORACLES and choose **Templar** or **Atheon**.
+3. Select the input carrying the game's audio, usually **CABLE Output** with VB-CABLE.
+4. Select **Start listening**. Allow the detector time to start before beginning the encounter.
+5. Select **Show overlay** to display the map and callouts. Use **Hide overlay** in the main app to hide it.
 
-## Build and test
+Keep voices and unrelated audio out of the selected input where possible. ORACLES does not configure Windows audio routing for you.
 
-Windows, Python 3.14:
+The overlay is 600 × 330 pixels, positioned 40 pixels from the upper-left corner. It has no border and does not intercept mouse clicks. Borderless or windowed game display may be needed for it to remain visible.
+
+## Build from source
+
+Use Windows with Python 3.14 installed. From the repository root:
 
 ```powershell
 python -m venv .venv
 .venv/Scripts/python -m pip install -r requirements.txt
-.venv/Scripts/python -m unittest discover -s tests -v
 ./build.ps1
 ```
 
-Source is under `app/`. `build.ps1` produces a single windowed executable in `dist/`. Build output and runtime files stay outside Git. Do not publish the old website ZIP; any future release must use the reviewed new build.
+The build produces `dist/Oracles.exe`. Build files and runtime sessions are excluded from Git.
 
-## Limits
+To run the focused tests:
 
-This is a new graphical shell around the supplied detector, not a rewrite of its audio classification. It retains the original readme's repeated-note limitation. Samples passed through a virtual cable are a functional check, not proof of accuracy during a raid. No in-game overlay injection is used. The overlay is a normal always-on-top window and may require borderless/windowed game display.
+```powershell
+.venv/Scripts/python -m unittest discover -s tests -v
+```
 
-See `VERIFICATION.md` for checks actually performed. Publication remains on hold pending owner review.
+## Known limitations
+
+ORACLES adds the desktop interface and overlay around an existing audio detector. It does not change that detector's classification logic. Repeated notes and background audio can affect results; a missing or incorrect callout is possible.
+
+Packaged-app checks cover startup, encounter selection, sample audio through VB-CABLE, sequence updates and shutdown. A controlled full-raid accuracy test has not been completed. See [verification notes](VERIFICATION.md) for the exact checks.
+
+## Credits
+
+ORACLES is maintained by [Leah / l3gh](https://github.com/l3gh), with a new graphical launcher, integrated overlay and single-executable packaging.
+
+The audio detector comes from **[Prophet](https://github.com/PyrexPi/prophet), created by [PyrexPi](https://github.com/PyrexPi)**. Thanks also to upstream contributors [dracco1993](https://github.com/dracco1993) and [moverholt5](https://github.com/moverholt5). ORACLES is a separate project and is not presented as their official release.
+
+The supplied Templar map credits **Destiny Raider**. Encounter maps and audio samples were supplied with the upstream tool. Destiny 2 and its game assets belong to **Bungie**. This is an independent community tool.
+
+See [credits and third-party notices](CREDITS.md) for provenance and dependency acknowledgements.
+
+## License
+
+ORACLES code is distributed under [GNU GPLv3](LICENSE), retaining the upstream detector's GPLv3 license. Third-party libraries and game assets retain their respective notices and rights.
+
+The preserved input files are in [`original/`](original/). A pinned copy of the upstream detector source and its license is in [`third_party/detector/`](third_party/detector/); see [source provenance](third_party/detector/PROVENANCE.md) for the distinction between that source snapshot and the supplied binaries.

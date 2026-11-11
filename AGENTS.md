@@ -1,5 +1,7 @@
 # Working on Oracles
 
+- Product branding is ORACLES. Keep the upstream project's name in credits, license/source provenance and preserved original files, not in the product subtitle or repository description. Retain CREDITS.md and the upstream license when updating documentation or packaging.
+
 - Use `Leah <228398289+l3gh@users.noreply.github.com>` as primary author and committer.
 - Read README.md before working. This is the desktop app repository, separate from the l3gh website and its archive.
 - Preserve `original/` as the supplied reference. Develop changes in separate source files.
