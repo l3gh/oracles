@@ -1,8 +1,8 @@
 # Oracles
 
-Windows desktop work on Prophet, the Vault of Glass oracle audio tool.
+Windows desktop app for Vault of Glass oracle audio detection.
 
-`original/` preserves the complete supplied Prophet folder, including both executables, audio samples, encounter mappings, maps, readme and the Python map overlay. The original files have not been modified.
+`original/` preserves the complete supplied tool folder, including both executables, audio samples, encounter mappings, maps, readme and the Python map overlay. The original files have not been modified.
 
 ## Run
 

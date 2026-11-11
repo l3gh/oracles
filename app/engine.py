@@ -34,7 +34,7 @@ class Engine:
         if self.process is not None:
             raise RuntimeError('Stop the current session first.')
         if not (self.source / 'prophet.exe').is_file():
-            raise FileNotFoundError('The bundled Prophet detector is missing.')
+            raise FileNotFoundError('The bundled audio detector is missing.')
         self.folder = Path(tempfile.mkdtemp(prefix='oracles-'))
         try:
             shutil.copytree(self.source / 'samples', self.folder / 'samples')

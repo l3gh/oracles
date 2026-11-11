@@ -19,3 +19,5 @@ Restored the compact map-left/callouts-right layout and original colors, colored
 Native Windows/Tk inspection passed for geometry, opacity, override-redirect and the layered, transparent and no-activate extended styles. Rendered both encounter maps and a Templar 1-2-3 sequence in the native probe. Rebuilt and launched the packaged executable, visually reviewed the restored overlay, and clicked the main app's encounter dropdown through the overlay; the underlying dropdown opened successfully. No detector changes were made. The earlier build fingerprint above is historical and does not identify this rebuilt executable.
 
 Removed the overlay's outer padding, Tk border widths, native frame/edge styles and Windows compositor border. A native probe confirmed no frame/edge flags, zero canvas inset, and retained 50% opacity and click-through. The Windows executable was rebuilt for this change.
+
+Removed the full subtitle beneath the Oracles heading and the old product name from visible error text, current README copy and repository description. Original reference files and the detector's internal filename remain preserved. Rebuilt the windowed executable.
