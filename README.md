@@ -4,14 +4,33 @@ Windows desktop work on Prophet, the Vault of Glass oracle audio tool.
 
 `original/` preserves the complete supplied Prophet folder, including both executables, audio samples, encounter mappings, maps, readme and the Python map overlay. The original files have not been modified.
 
-## Current task
+## Run
 
-Replace terminal-based setup with graphical encounter and audio-device selection. The owner wants one thing to run and no visible terminal windows. Publication and website download packaging are on hold until this desktop work is reviewed.
+Open `dist/Oracles.exe`. That is the only program you need to launch. It bundles the detector, samples, encounter mappings and map images. Python does not need to be installed on the recipient's PC.
 
-The audio detector and old interface are supplied as executables; their original source is not present. The map overlay source is available. Investigate the detector's input/output behavior before choosing between a hidden subprocess adapter and a replacement detection component.
+1. Choose Templar or Atheon in the window.
+2. Choose the input carrying game audio, usually CABLE Output when using VB-CABLE. Audio routing still needs to be set up separately.
+3. Select Start listening. Select Stop to change settings or start another session.
 
-## Verification so far
+The sequence appears in the app. Show overlay opens a movable, resizable window that stays on top. Closing the overlay hides it; closing the main app stops the detector too. The Templar map marks sequence positions and connects them in order using the supplied overlay coordinates. Atheon retains its reference map and numeric sequence.
 
-The detector can be started with Windows `CREATE_NO_WINDOW` and captured output. It prints `Choose your encounter file (templar/atheon):`. A short probe that sent `templar` through redirected stdin did not reach a further prompt within 12 seconds. No working graphical launcher or audio detection test is claimed yet.
+No terminal is opened and no options need to be typed. The original detector runs as a hidden child process. First startup can take a little while as the bundled Python/audio components load. Stopped sessions retain their last result for reference; starting a new session or changing encounters clears it.
 
-The original readme requires routed game audio via a virtual microphone and records repeated-note issues in the second oracle wave. Retain those limitations until verified or fixed.
+## Build and test
+
+Windows, Python 3.14:
+
+```powershell
+python -m venv .venv
+.venv/Scripts/python -m pip install -r requirements.txt
+.venv/Scripts/python -m unittest discover -s tests -v
+./build.ps1
+```
+
+Source is under `app/`. `build.ps1` produces a single windowed executable in `dist/`. Build output and runtime files stay outside Git. Do not publish the old website ZIP; any future release must use the reviewed new build.
+
+## Limits
+
+This is a new graphical shell around the supplied detector, not a rewrite of its audio classification. It retains the original readme's repeated-note limitation. Samples passed through a virtual cable are a functional check, not proof of accuracy during a raid. No in-game overlay injection is used. The overlay is a normal always-on-top window and may require borderless/windowed game display.
+
+See `VERIFICATION.md` for checks actually performed. Publication remains on hold pending owner review.
