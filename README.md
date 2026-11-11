@@ -12,7 +12,7 @@ Open `dist/Oracles.exe`. That is the only program you need to launch. It bundles
 2. Choose the input carrying game audio, usually CABLE Output when using VB-CABLE. Audio routing still needs to be set up separately.
 3. Select Start listening. Select Stop to change settings or start another session.
 
-The sequence appears in the app. Show overlay opens a movable, resizable window that stays on top. Closing the overlay hides it; closing the main app stops the detector too. The Templar map marks sequence positions and connects them in order using the supplied overlay coordinates. Atheon retains its reference map and numeric sequence.
+The sequence appears in the app. Show overlay opens the original compact layout: map on the left, encounter and callouts on the right, 50% opacity, borderless, always on top and click-through. It is fixed at 600×330 pixels, 40 pixels from the upper-left corner. Use Hide overlay in the main app to hide it. Closing the main app stops the detector too. The Templar map marks sequence positions and connects them in order using the supplied overlay coordinates. Atheon retains its reference map and numeric sequence.
 
 No terminal is opened and no options need to be typed. The original detector runs as a hidden child process. First startup can take a little while as the bundled Python/audio components load. Stopped sessions retain their last result for reference; starting a new session or changing encounters clears it.
 

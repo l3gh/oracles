@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from PIL import Image, ImageTk
 from engine import Engine, input_devices, resources
+from overlay import Overlay
 
 
 class App:
@@ -44,7 +45,8 @@ class App:
         self.start_button.pack(side='left')
         self.stop_button = ttk.Button(actions, text='Stop', command=self.stop, state='disabled')
         self.stop_button.pack(side='left', padx=8)
-        ttk.Button(actions, text='Show overlay', command=self.show_overlay).pack(side='left')
+        self.overlay_button = ttk.Button(actions, text='Show overlay', command=self.show_overlay)
+        self.overlay_button.pack(side='left')
         self.status = tk.StringVar(value='Choose an encounter and audio input to begin.')
         ttk.Label(frame, textvariable=self.status, wraplength=660).pack(anchor='w')
         self.order = tk.StringVar(value='Waiting for oracle sequence')
@@ -127,28 +129,21 @@ class App:
         self.root.after(250, self.poll)
 
     def show_overlay(self):
-        if self.overlay and self.overlay.winfo_exists():
-            self.overlay.lift()
+        if self.overlay:
+            self.overlay.destroy()
+            self.overlay = None
+            self.overlay_button.config(text='Show overlay')
             return
-        self.overlay = tk.Toplevel(self.root)
-        self.overlay.title('Oracles · sequence')
-        self.overlay.geometry('620x490')
-        self.overlay.minsize(420, 340)
-        self.overlay.attributes('-topmost', True)
-        self.overlay.configure(bg='#211e35')
-        ttk.Label(self.overlay, textvariable=self.order, font=('Segoe UI', 24, 'bold'), padding=18).pack()
-        ttk.Label(self.overlay, text='Move or resize this window normally. Close it to hide.', padding=8).pack()
-        self.overlay_canvas = tk.Canvas(self.overlay, bg='#171524', highlightthickness=0)
-        self.overlay_canvas.pack(fill='both', expand=True)
-        self.overlay_canvas.bind('<Configure>', lambda _: self.paint())
+        self.overlay = Overlay(self.root)
+        self.overlay_button.config(text='Hide overlay')
         self.paint()
 
     def paint(self):
         encounter = self.encounter.get().lower()
         filename = 'VaultOfGlass_Templar.png' if encounter == 'templar' else 'VaultOfGlass_Atheon.png'
         canvases = [self.canvas]
-        if self.overlay and self.overlay.winfo_exists():
-            canvases.append(self.overlay_canvas)
+        if self.overlay:
+            self.overlay.paint(encounter,self.sequence)
         for canvas in canvases:
             image = Image.open(resources() / filename).convert('RGB')
             width, height = image.size

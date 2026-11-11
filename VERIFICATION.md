@@ -11,3 +11,9 @@
 - PE subsystem is Windows GUI (2), not console. Final local executable is 117,316,149 bytes; SHA-256 `f12cf7f06fc1cc7f5a42e834297f1552be207cdb8d8eb4aff36e5d60042693f0`.
 
 No controlled raid playthrough, clean-PC installation, code-signing or antivirus reputation check is claimed. Existing detector accuracy limitations remain.
+
+## Original overlay restoration
+
+Restored the compact map-left/callouts-right layout and original colors, colored oracle rings and order badges. The overlay is borderless, 50% opaque, fixed at 600×330 at screen +40+40, topmost and click-through. It has no drag/resize controls. Show/Hide overlay in the main app controls visibility.
+
+Native Windows/Tk inspection passed for geometry, opacity, override-redirect and the layered, transparent and no-activate extended styles. Rendered both encounter maps and a Templar 1-2-3 sequence in the native probe. Rebuilt and launched the packaged executable, visually reviewed the restored overlay, and clicked the main app's encounter dropdown through the overlay; the underlying dropdown opened successfully. No detector changes were made. The earlier build fingerprint above is historical and does not identify this rebuilt executable.
