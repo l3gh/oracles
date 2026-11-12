@@ -1,0 +1,5 @@
+{
+  "license_url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-10.0.1/llvm/LICENSE.TXT",
+  "sha256": "8d85c1057d742e597985c7d4e6320b015a9139385cff4cbae06ffc0ebe89afee",
+  "note": "LLVM 10.0.1 is identified by llvmlite 0.36 build documentation; the llvmlite Windows wheel was byte-matched to the detector DLL. Upstream llvmlite build patches are needed for reproduction."
+}

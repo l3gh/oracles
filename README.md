@@ -17,7 +17,7 @@ A Windows companion for oracle encounters in Destiny 2's Vault of Glass. Choose 
 
 ## Getting started
 
-There is no published ORACLES release yet. Build the app using the instructions below, then open `dist/Oracles.exe`. A built copy bundles the detector and assets; the person running it does not need Python.
+[Download ORACLES v0.1.0 for Windows](https://github.com/l3gh/oracles/releases/tag/v0.1.0), extract the ZIP, then open `Oracles.exe`. The download bundles the detector and assets; you do not need Python to run it.
 
 1. Route the game's audio to a virtual input, such as [VB-CABLE](https://vb-audio.com/Cable/).
 2. Open ORACLES and choose **Templar** or **Atheon**.

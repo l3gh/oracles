@@ -41,10 +41,10 @@ The original executable is a Python 3.9 PyInstaller bundle. The following versio
 ## Still unverified
 
 - The exact setuptools version is not established. Its embedded `setuptools` and `pkg_resources` entry points match multiple versions from 54.1.0 through 57.4.0, whose license files at 54.1.0, 56.0.0 and 57.4.0 have identical SHA-256 hashes. The collected notice is from 57.4.0, but the full package has not been matched.
-- The bundled native libraries include OpenBLAS, LLVM/llvmlite, libsndfile, OpenSSL, libffi, Fortran runtime components and Microsoft runtime libraries. Their exact versions, licenses, notices and corresponding sources have not all been established.
-- Full copyright/license texts and dependency notice packaging for the downloadable executable have not yet been assembled.
+- The bundled native libraries include OpenBLAS, LLVM/llvmlite, libsndfile, OpenSSL, libffi, Fortran runtime components and Microsoft runtime libraries. Their exact builds and source provenance have not all been established.
+- Collected copyright and license texts are in `notices/`. They have not been independently audited as a complete inventory of every transitive component.
 
-These gaps must be resolved before publishing the existing binary. The draft release remains private.
+The original detector executable has not yet been reproduced from a clean build. Keep these provenance limitations visible to downstream users.
 
 ## Native file comparisons
 
