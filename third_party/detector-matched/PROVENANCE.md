@@ -6,4 +6,4 @@ The original executable is a Python 3.9 PyInstaller bundle. Its embedded `main`,
 
 The archive's Python version modules identify NumPy 1.20.3, SciPy 1.6.3, librosa 0.8.1, Numba 0.53.1 and llvmlite 0.36.0. Other bundled dependency versions and their complete notices remain to be identified; the original archive contains no distribution metadata or license files under identifiable metadata paths.
 
-The later source snapshot in `../detector/` is retained for provenance but contains changes absent from the supplied executable. Bundled dependency notices and exact dependency sources still require verification before public binary distribution.
+The later source snapshot in `../detector/` is retained for provenance but contains changes absent from the supplied executable. See `../BUNDLED-COMPONENTS.md` for recovered dependency versions, source links, collected notices and remaining verification limits.
