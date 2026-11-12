@@ -24,4 +24,6 @@ ORACLES uses [Python and Tkinter](https://www.python.org/), [Pillow](https://pyt
 
 The legacy detector has its own dependencies, including NumPy, PyAudio and librosa. Its upstream dependency list is retained in [`third_party/detector/requirements.txt`](third_party/detector/requirements.txt).
 
+An inventory of components recovered from the supplied executable, with version evidence and outstanding notice/source gaps, is in [`third_party/BUNDLED-COMPONENTS.md`](third_party/BUNDLED-COMPONENTS.md).
+
 [VB-CABLE](https://vb-audio.com/Cable/) is an external audio-routing option by VB-Audio Software. It is not included in ORACLES.
