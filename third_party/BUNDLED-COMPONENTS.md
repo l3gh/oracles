@@ -10,8 +10,8 @@ The original executable is a Python 3.9 PyInstaller bundle. The following versio
 | numba | 0.53.1 | BSD | [PyPI files](https://pypi.org/project/numba/0.53.1/#files) |
 | llvmlite | 0.36.0 | BSD | [PyPI files](https://pypi.org/project/llvmlite/0.36.0/#files) |
 | pandas | 1.2.4 | BSD | [PyPI files](https://pypi.org/project/pandas/1.2.4/#files) |
-| PyAudio | 0.2.11 | Not established | [PyPI files](https://pypi.org/project/PyAudio/0.2.11/#files) |
-| SoundFile | 0.10.3 | Not established | Unverified |
+| PyAudio | 0.2.11 | MIT notice in upstream PKG-INFO | [PyPI files](https://pypi.org/project/PyAudio/0.2.11/#files) |
+| SoundFile | 0.10.3.post1 | BSD 3-Clause | [PyPI files](https://pypi.org/project/SoundFile/0.10.3.post1/#files) |
 | audioread | 2.1.9 | MIT | [PyPI files](https://pypi.org/project/audioread/2.1.9/#files) |
 | scikit-learn | 0.24.2 | new BSD | [PyPI files](https://pypi.org/project/scikit-learn/0.24.2/#files) |
 | joblib | 1.0.1 | BSD | [PyPI files](https://pypi.org/project/joblib/1.0.1/#files) |
@@ -33,13 +33,13 @@ The original executable is a Python 3.9 PyInstaller bundle. The following versio
 | beautifulsoup4 | 4.9.3 | MIT | [PyPI files](https://pypi.org/project/beautifulsoup4/4.9.3/#files) |
 | pycparser | 2.20 | BSD | [PyPI files](https://pypi.org/project/pycparser/2.20/#files) |
 | pyparsing | 2.4.7 | MIT License | [PyPI files](https://pypi.org/project/pyparsing/2.4.7/#files) |
+| soupsieve | 2.2.1 | Not yet checked | [PyPI files](https://pypi.org/project/soupsieve/2.2.1/#files) |
 
 * Pooch reports a dirty build in its embedded version metadata. The same version number does not establish identical source.
 
 ## Still unverified
 
-- SoundFile reports `0.10.3` internally, but the corresponding PyPI distribution and exact native libsndfile build are not established.
-- Exact versions and source for setuptools, soupsieve and wincertstore are not established.
+- Exact versions and source for setuptools and wincertstore are not established.
 - The bundled native libraries include OpenBLAS, LLVM/llvmlite, libsndfile, OpenSSL, libffi, Fortran runtime components and Microsoft runtime libraries. Their exact versions, licenses, notices and corresponding sources have not all been established.
 - Full copyright/license texts and dependency notice packaging for the downloadable executable have not yet been assembled.
 
@@ -48,6 +48,8 @@ These gaps must be resolved before publishing the existing binary. The draft rel
 ## Native file comparisons
 
 On 2026-11-12, the corresponding CPython 3.9 Windows wheels were downloaded from PyPI and checked against PyPI's SHA-256 before comparing native files to the original executable. NumPy had 14/14 matching native files, SciPy 82/82, pandas 41/41, Numba 12/12, llvmlite 1/1, and scikit-learn 44/44 for matching paths under each package directory. This does not establish that unrelated DLLs, pure Python files, or other components match those wheels.
+
+The PyAudio 0.2.11 and SoundFile 0.10.3.post1 Python modules also matched their PyPI source archives recursively at Python 3.9 bytecode level, excluding filename and line-number metadata. SoundFile's bundled `libsndfile64bit.dll` matched the Windows wheel exactly. PyAudio's native extension has not yet been matched.
 
 | PyPI wheel | SHA-256 |
 | --- | --- |
