@@ -1,3 +1,4 @@
 original/** -text
 third_party/detector/** -text
+third_party/detector-matched/** -text
 LICENSE -text

@@ -67,4 +67,4 @@ See [credits and third-party notices](CREDITS.md) for provenance and dependency 
 
 ORACLES code is distributed under [GNU GPLv3](LICENSE), retaining the upstream detector's GPLv3 license. Third-party libraries and game assets retain their respective notices and rights.
 
-The preserved input files are in [`original/`](original/). A pinned copy of the upstream detector source and its license is in [`third_party/detector/`](third_party/detector/); see [source provenance](third_party/detector/PROVENANCE.md) for the distinction between that source snapshot and the supplied binaries.
+The preserved input files are in [`original/`](original/). The older [detector source snapshot](third_party/detector-matched/PROVENANCE.md) matches the bundled detector's three application modules at bytecode level. A later upstream snapshot is also retained in [`third_party/detector/`](third_party/detector/). The exact bundled dependency versions and a reproducible full binary build remain unverified.

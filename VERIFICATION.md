@@ -21,3 +21,7 @@ Native Windows/Tk inspection passed for geometry, opacity, override-redirect and
 Removed the overlay's outer padding, Tk border widths, native frame/edge styles and Windows compositor border. A native probe confirmed no frame/edge flags, zero canvas inset, and retained 50% opacity and click-through. The Windows executable was rebuilt for this change.
 
 Removed the full subtitle beneath the Oracles heading and the old product name from visible error text, current README copy and repository description. Original reference files and the detector's internal filename remain preserved. Rebuilt the windowed executable.
+
+## Detector source comparison, 2026-11-12
+
+Extracted the original executable's embedded `main`, `model` and `resource_path` Python 3.9 code objects. Compiling source files from upstream revision `65f9c587b0f42f7bb292be5cdf8394ba23393710` with CPython 3.9.13 produced matching bytecode, constants, names, variables and flags recursively, excluding file paths and line-number metadata. That revision is preserved in `third_party/detector-matched/`. The previously pinned later revision has a different encounter prompt. Third-party dependency versions and reproducibility of the complete executable remain unverified.

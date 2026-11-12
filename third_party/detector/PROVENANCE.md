@@ -8,4 +8,4 @@
 
 The Python modules, requirements and README here are unmodified downloads from that revision. Maps, samples and mappings supplied with this project are preserved separately under `../../original/`.
 
-ORACLES currently runs the supplied legacy detector executable. Its exact source revision and build environment are unverified. This pinned source snapshot records the upstream implementation; it does not establish that the supplied executable was built from this exact revision. Establish and document a reproducible detector build, and assemble dependency notices and corresponding source, before preparing a public binary release. No new release is published by this documentation update.
+ORACLES currently runs the supplied legacy detector executable. This later revision differs from the bundled detector. A bytecode comparison identified an older matching candidate for its three application modules; see `../detector-matched/PROVENANCE.md`. Bundled dependency versions and a reproducible full executable build remain unverified. No new release is published by this documentation update.

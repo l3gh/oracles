@@ -10,7 +10,7 @@ The detector is based on [PyrexPi/prophet](https://github.com/PyrexPi/prophet), 
 
 The upstream project's name is retained here for attribution. The name of this application is **ORACLES**.
 
-Upstream source is preserved at revision `c1181db3ed7d46226f9e786de2b1399ab91b5ea3` in [`third_party/detector/`](third_party/detector/), including the original license and README. The supplied executable's precise build revision has not been established; the source snapshot is not claimed to be a reproducible match for that binary.
+Upstream source is preserved in [`third_party/detector/`](third_party/detector/) and [`third_party/detector-matched/`](third_party/detector-matched/), including the original license and README. The latter matches the bundled detector's three application modules at Python bytecode level. Its dependency versions and complete build environment remain unverified.
 
 ## Maps, samples and game assets
 
