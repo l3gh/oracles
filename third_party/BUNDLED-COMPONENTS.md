@@ -44,3 +44,16 @@ The original executable is a Python 3.9 PyInstaller bundle. The following versio
 - Full copyright/license texts and dependency notice packaging for the downloadable executable have not yet been assembled.
 
 These gaps must be resolved before publishing the existing binary. The draft release remains private.
+
+## Native file comparisons
+
+On 2026-11-12, the corresponding CPython 3.9 Windows wheels were downloaded from PyPI and checked against PyPI's SHA-256 before comparing native files to the original executable. NumPy had 14/14 matching native files, SciPy 82/82, pandas 41/41, Numba 12/12, llvmlite 1/1, and scikit-learn 44/44 for matching paths under each package directory. This does not establish that unrelated DLLs, pure Python files, or other components match those wheels.
+
+| PyPI wheel | SHA-256 |
+| --- | --- |
+| numpy-1.20.3-cp39-cp39-win_amd64.whl | `6690080810f77485667bfbff4f69d717c3be25e5b11bb2073e76bb3f578d99b4` |
+| scipy-1.6.3-cp39-cp39-win_amd64.whl | `3274ce145b5dc416c49c0cf8b6119f787f0965cd35e22058fe1932c09fe15d77` |
+| pandas-1.2.4-cp39-cp39-win_amd64.whl | `2b063d41803b6a19703b845609c0b700913593de067b552a8b24dd8eeb8c9895` |
+| numba-0.53.1-cp39-cp39-win_amd64.whl | `17146885cbe4e89c9d4abd4fcb8886dee06d4591943dc4343500c36ce2fcfa69` |
+| llvmlite-0.36.0-cp39-cp39-win_amd64.whl | `1dee416ea49fd338c74ec15c0c013e5273b0961528169af06ff90772614f7f6c` |
+| scikit_learn-0.24.2-cp39-cp39-win_amd64.whl | `40556bea1ef26ef54bc678d00cf138a63069144a0b5f3a436eecd8f3468b903e` |
