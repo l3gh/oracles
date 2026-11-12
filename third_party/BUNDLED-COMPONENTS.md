@@ -33,13 +33,14 @@ The original executable is a Python 3.9 PyInstaller bundle. The following versio
 | beautifulsoup4 | 4.9.3 | MIT | [PyPI files](https://pypi.org/project/beautifulsoup4/4.9.3/#files) |
 | pycparser | 2.20 | BSD | [PyPI files](https://pypi.org/project/pycparser/2.20/#files) |
 | pyparsing | 2.4.7 | MIT License | [PyPI files](https://pypi.org/project/pyparsing/2.4.7/#files) |
-| soupsieve | 2.2.1 | Not yet checked | [PyPI files](https://pypi.org/project/soupsieve/2.2.1/#files) |
+| soupsieve | 2.2.1 | MIT | [PyPI files](https://pypi.org/project/soupsieve/2.2.1/#files) |
+| wincertstore | 0.2 | PSF | [PyPI files](https://pypi.org/project/wincertstore/0.2/#files) |
 
 * Pooch reports a dirty build in its embedded version metadata. The same version number does not establish identical source.
 
 ## Still unverified
 
-- Exact versions and source for setuptools and wincertstore are not established.
+- The exact setuptools version is not established. Its embedded `setuptools` and `pkg_resources` entry points match multiple versions from 54.1.0 through 57.4.0, whose license files at 54.1.0, 56.0.0 and 57.4.0 have identical SHA-256 hashes. The collected notice is from 57.4.0, but the full package has not been matched.
 - The bundled native libraries include OpenBLAS, LLVM/llvmlite, libsndfile, OpenSSL, libffi, Fortran runtime components and Microsoft runtime libraries. Their exact versions, licenses, notices and corresponding sources have not all been established.
 - Full copyright/license texts and dependency notice packaging for the downloadable executable have not yet been assembled.
 
@@ -49,7 +50,9 @@ These gaps must be resolved before publishing the existing binary. The draft rel
 
 On 2026-11-12, the corresponding CPython 3.9 Windows wheels were downloaded from PyPI and checked against PyPI's SHA-256 before comparing native files to the original executable. NumPy had 14/14 matching native files, SciPy 82/82, pandas 41/41, Numba 12/12, llvmlite 1/1, and scikit-learn 44/44 for matching paths under each package directory. This does not establish that unrelated DLLs, pure Python files, or other components match those wheels.
 
-The PyAudio 0.2.11 and SoundFile 0.10.3.post1 Python modules also matched their PyPI source archives recursively at Python 3.9 bytecode level, excluding filename and line-number metadata. SoundFile's bundled `libsndfile64bit.dll` matched the Windows wheel exactly. PyAudio's native extension has not yet been matched.
+The PyAudio 0.2.11 and SoundFile 0.10.3.post1 Python modules also matched their PyPI source archives recursively at Python 3.9 bytecode level, excluding filename and line-number metadata. SoundFile's bundled `libsndfile64bit.dll` matched the Windows wheel exactly. The wincertstore 0.2 and soupsieve 2.2.1 Python entry points likewise match their PyPI wheels at bytecode level. Other modules within those packages have not all been compared.
+
+The PyAudio native extension reports PortAudio V19.6.0-devel, revision [`396fe4b6699ae929d3a685b3ef8a7e97396139a4`](https://github.com/PortAudio/portaudio/commit/396fe4b6699ae929d3a685b3ef8a7e97396139a4); its upstream license is included in `notices/portaudio/`. Embedded strings identify libsndfile 1.0.28, OpenSSL 1.1.1k and SQLite 3.35.4. The Python DLL reports version 3.9.5. The bundled `libffi-7.dll` matches the Python 3.9.5 official Windows embeddable distribution; the Python DLL from that archive has the same version but different bytes.
 
 | PyPI wheel | SHA-256 |
 | --- | --- |

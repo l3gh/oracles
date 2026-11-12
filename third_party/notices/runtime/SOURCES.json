@@ -1,0 +1,32 @@
+[
+  {
+    "file": "python-3.9.5-LICENSE.txt",
+    "source": "https://raw.githubusercontent.com/python/cpython/v3.9.5/LICENSE",
+    "sha256": "599826df92bfdcd2702eac691072498bb096c55af04ee984cf90f70ed77b5a70"
+  },
+  {
+    "file": "tcl-9.0.4-license.terms",
+    "source": "https://raw.githubusercontent.com/tcltk/tcl/core-9-0-4/license.terms",
+    "sha256": "c0a69a2bfd757361ec7e6143973b103c90409316b49e9c88db26ad6388e79f16"
+  },
+  {
+    "file": "tk-9.0.4-license.terms",
+    "source": "https://raw.githubusercontent.com/tcltk/tk/core-9-0-4/license.terms",
+    "sha256": "2cde822b93ca16ae535c954b7dfe658b4ad10df2a193628d1b358f1765e8b198"
+  },
+  {
+    "file": "openssl-1.1.1k-LICENSE.txt",
+    "source": "https://raw.githubusercontent.com/openssl/openssl/OpenSSL_1_1_1k/LICENSE",
+    "sha256": "c32913b33252e71190af2066f08115c69bc9fddadf3bf29296e20c835389841c"
+  },
+  {
+    "file": "libffi-3.3-LICENSE.txt",
+    "source": "https://raw.githubusercontent.com/libffi/libffi/v3.3/LICENSE",
+    "sha256": "deaf3a42effb551a5b140fa9afefed183a27f1341c6d1bf430d106a5e6931fc0"
+  },
+  {
+    "file": "python-3.14-LICENSE.txt",
+    "source": "local CPython 3.14 installation",
+    "sha256": "935cf13e19f8c31b497d20b05d73623431a226b230c3599bc30fa3348979bc68"
+  }
+]
