@@ -36,7 +36,7 @@ The original executable is a Python 3.9 PyInstaller bundle. The following versio
 | soupsieve | 2.2.1 | MIT | [PyPI files](https://pypi.org/project/soupsieve/2.2.1/#files) |
 | wincertstore | 0.2 | PSF | [PyPI files](https://pypi.org/project/wincertstore/0.2/#files) |
 
-* Pooch reports a dirty build in its embedded version metadata. The same version number does not establish identical source.
+* Pooch reports a dirty build in its embedded version metadata. All seven bundled Pooch Python modules matched the PyPI 1.3.0 wheel recursively at Python 3.9 bytecode level, including its version module; this does not prove how the wheel itself was built.
 
 ## Still unverified
 
@@ -51,6 +51,8 @@ These gaps must be resolved before publishing the existing binary. The draft rel
 On 2026-11-12, the corresponding CPython 3.9 Windows wheels were downloaded from PyPI and checked against PyPI's SHA-256 before comparing native files to the original executable. NumPy had 14/14 matching native files, SciPy 82/82, pandas 41/41, Numba 12/12, llvmlite 1/1, and scikit-learn 44/44 for matching paths under each package directory. This does not establish that unrelated DLLs, pure Python files, or other components match those wheels.
 
 The PyAudio 0.2.11 and SoundFile 0.10.3.post1 Python modules also matched their PyPI source archives recursively at Python 3.9 bytecode level, excluding filename and line-number metadata. SoundFile's bundled `libsndfile64bit.dll` matched the Windows wheel exactly. The wincertstore 0.2 and soupsieve 2.2.1 Python entry points likewise match their PyPI wheels at bytecode level. Other modules within those packages have not all been compared.
+
+The entry-point modules of appdirs, audioread, beautifulsoup4, certifi, cffi, chardet, decorator, idna, joblib, librosa, packaging, pycparser, pyparsing, python-dateutil, pytz, requests, resampy, six, soupsieve, threadpoolctl and urllib3 also matched their reported-version PyPI source distributions or wheels at Python 3.9 bytecode level. This entry-point check does not prove every module within those packages is identical.
 
 The PyAudio native extension reports PortAudio V19.6.0-devel, revision [`396fe4b6699ae929d3a685b3ef8a7e97396139a4`](https://github.com/PortAudio/portaudio/commit/396fe4b6699ae929d3a685b3ef8a7e97396139a4); its upstream license is included in `notices/portaudio/`. Embedded strings identify libsndfile 1.0.28, OpenSSL 1.1.1k and SQLite 3.35.4. The Python DLL reports version 3.9.5. The bundled `libffi-7.dll` matches the Python 3.9.5 official Windows embeddable distribution; the Python DLL from that archive has the same version but different bytes.
 
