@@ -44,6 +44,9 @@ class App:
         self.start_button.pack(side='left')
         self.stop_button = ttk.Button(actions, text='Stop', command=self.stop, state='disabled')
         self.stop_button.pack(side='left', padx=8)
+        self.reset_button = ttk.Button(actions, text='Reset after wipe',
+                                       command=self.reset_listener, state='disabled')
+        self.reset_button.pack(side='left', padx=(0, 8))
         self.overlay_button = ttk.Button(actions, text='Show overlay', command=self.show_overlay)
         self.overlay_button.pack(side='left')
         self.status = tk.StringVar(value='Choose an encounter and audio input to begin.')
@@ -84,30 +87,34 @@ class App:
         if not 0 <= index < len(self.devices):
             messagebox.showerror('Select audio input', 'Choose an available game audio input first.')
             return
+        self.change_encounter()
         try:
             self.engine.start(self.encounter.get().lower(), self.devices[index][0])
         except Exception as exc:
             messagebox.showerror('Could not start', str(exc))
             return
         self.started = time.monotonic()
-        self.sequence = []
-        self.order.set('Waiting for oracle sequence')
         self.status.set('Starting detector…')
         self.start_button['state'] = 'disabled'
         self.stop_button['state'] = 'normal'
+        self.reset_button['state'] = 'normal'
         self.encounter['state'] = 'disabled'
         self.device['state'] = 'disabled'
         self.refresh_button['state'] = 'disabled'
-        self.paint()
 
     def stop(self):
         self.engine.stop()
         self.start_button['state'] = 'normal'
         self.stop_button['state'] = 'disabled'
+        self.reset_button['state'] = 'disabled'
         self.encounter['state'] = 'readonly'
         self.device['state'] = 'readonly'
         self.refresh_button['state'] = 'normal'
         self.status.set('Stopped. Choose settings or start again.')
+
+    def reset_listener(self):
+        self.stop()
+        self.start()
 
     def poll(self):
         process = self.engine.process
@@ -119,12 +126,18 @@ class App:
                 messagebox.showerror('Detector stopped', 'Try another audio input.\n\n' + details)
             else:
                 sequence = self.engine.sequence()
-                if sequence != self.sequence:
-                    self.sequence = sequence
-                    self.order.set(' → '.join(sequence) if sequence else 'Waiting for oracle sequence')
-                    self.paint()
-                if time.monotonic() - self.started > 20:
-                    self.status.set('Detector running. Waiting for game audio.' if not sequence else 'Oracle sequence received.')
+                if (self.encounter.get() == 'Templar' and len(sequence) == 7
+                        and self.engine.sequence_is_idle()):
+                    # The bundled detector keeps a length floor for the life of
+                    # the process, so it cannot report a shorter retry on its own.
+                    self.reset_listener()
+                else:
+                    if sequence != self.sequence:
+                        self.sequence = sequence
+                        self.order.set(' → '.join(sequence) if sequence else 'Waiting for oracle sequence')
+                        self.paint()
+                    if time.monotonic() - self.started > 20:
+                        self.status.set('Detector running. Waiting for game audio.' if not sequence else 'Oracle sequence received.')
         self.root.after(250, self.poll)
 
     def show_overlay(self):

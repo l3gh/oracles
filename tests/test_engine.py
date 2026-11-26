@@ -2,6 +2,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'app'))
 from engine import Engine
@@ -34,6 +35,19 @@ class EngineTests(unittest.TestCase):
                 path.write_text(raw)
                 self.assertEqual(engine.sequence(), expected)
             engine.folder = None
+
+    def test_only_idle_detector_output_expires(self):
+        with tempfile.TemporaryDirectory() as folder:
+            engine = Engine()
+            engine.folder = Path(folder)
+            self.assertFalse(engine.sequence_is_idle())
+            path = engine.folder / 'sequence.txt'
+            path.write_text('1-2-3-4-5-6-7')
+            updated = path.stat().st_mtime
+            with patch('engine.time.time', return_value=updated + 1):
+                self.assertFalse(engine.sequence_is_idle())
+            with patch('engine.time.time', return_value=updated + 2):
+                self.assertTrue(engine.sequence_is_idle())
 
 
 if __name__ == '__main__':

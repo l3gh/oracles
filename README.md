@@ -25,6 +25,8 @@ A Windows companion for oracle encounters in Destiny 2's Vault of Glass. Choose 
 4. Select **Start listening**. Allow the detector time to start before beginning the encounter.
 5. Select **Show overlay** to display the map and callouts. Use **Hide overlay** in the main app to hide it.
 
+After a wipe, **Reset after wipe** clears the map and restarts listening on the same input. After a seven-oracle Templar wave, ORACLES also resets automatically when the detector finishes the wave and stops writing callouts.
+
 Keep voices and unrelated audio out of the selected input where possible. ORACLES does not configure Windows audio routing for you.
 
 The overlay is 600 × 330 pixels, positioned 40 pixels from the upper-left corner. It has no border and does not intercept mouse clicks. Borderless or windowed game display may be needed for it to remain visible.

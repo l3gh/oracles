@@ -4,6 +4,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 from pathlib import Path
 
 
@@ -73,6 +74,17 @@ class Engine:
             return (self.folder / 'detector.log').read_text(errors='replace')[-4000:]
         except OSError:
             return ''
+
+    def sequence_is_idle(self):
+        if self.folder is None:
+            return False
+        try:
+            updated = (self.folder / 'sequence.txt').stat().st_mtime
+        except OSError:
+            return False
+        # The detector rewrites even an unchanged order while the wave is active.
+        # Allow for its half-second audio buffers and processing time.
+        return time.time() - updated >= 2
 
     def stop(self):
         if self.process is not None:
