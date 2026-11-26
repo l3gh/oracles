@@ -5,8 +5,16 @@ import tkinter as tk
 from PIL import Image, ImageTk
 from engine import resources
 
-MAP = {'1': ('A',282,158), '2': ('F',166,360), '3': ('D',239,362),
-       '4': ('C',383,389), '5': ('E',556,363), '6': ('G',607,258), '7': ('B',531,177)}
+# Centers of the glowing oracle squares in the 775 × 581 Templar map.
+MAP = {
+    '1': ('A', 283, 159),
+    '2': ('F', 167, 355),
+    '3': ('D', 213, 404),
+    '4': ('C', 384, 386),
+    '5': ('E', 556, 363),
+    '6': ('G', 608, 254),
+    '7': ('B', 504, 178),
+}
 COLORS = ['#48e5a2','#55c9ff','#ffc857','#ff6b81','#c99bff','#f7f7f2']
 BG = '#101722'
 
@@ -85,13 +93,13 @@ class Overlay:
         for a,b in zip(points,points[1:]):
             self.canvas.create_line(*a,*b,fill='white',width=2,arrow=tk.LAST)
         scale=image.width/width
-        for i,(x,y) in enumerate(points):
+        for i,(oracle,(x,y)) in enumerate(zip(sequence,points)):
             color=COLORS[i%len(COLORS)]
             r=max(10,int(23*scale))
             self.canvas.create_oval(x-r,y-r,x+r,y+r,fill=BG,outline=color,width=2)
-            self.canvas.create_text(x,y-2*scale,text=sequence[i],fill='white',font=('Segoe UI',max(8,int(17*scale)),'bold'))
+            self.canvas.create_text(x,y-2*scale,text=str(i+1),fill='white',font=('Segoe UI',max(8,int(17*scale)),'bold'))
             badge=max(11,int(22*scale));offset=max(6,int(12*scale))
             self.canvas.create_oval(x+offset,y+offset,x+offset+badge,y+offset+badge,fill=color,outline=BG)
-            self.canvas.create_text(x+offset+badge/2,y+offset+badge/2,text=str(i+1),fill=BG,font=('Segoe UI',max(6,int(9*scale)),'bold'))
+            self.canvas.create_text(x+offset+badge/2,y+offset+badge/2,text=oracle,fill=BG,font=('Segoe UI',max(6,int(9*scale)),'bold'))
         self.order.config(text='  →  '.join(f'{i+1}. {n} {MAP[n][0]}' if encounter=='templar' else f'{i+1}. {n}' for i,n in enumerate(sequence)))
         self.status.config(text=f'Detected {len(sequence)} oracle'+('s' if len(sequence)!=1 else '.') if sequence else 'Waiting for oracle sequence…')
